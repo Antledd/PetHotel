@@ -22,7 +22,6 @@ import javafx.scene.input.MouseEvent;
 
 public class PetHotelController {
 
-	List<PetClient> clientList = new ArrayList<PetClient>();
 
 	@FXML // ResourceBundle that was given to the FXMLLoader
 	private ResourceBundle resources;
