@@ -79,6 +79,7 @@
                      </children>
                   </HBox>
                   <Button mnemonicParsing="false" onMouseClicked="#insertClient" prefHeight="59.0" prefWidth="53.0" text="Insert" />
+                  <Button mnemonicParsing="false" onMouseClicked="#printClient" prefHeight="59.0" prefWidth="53.0" text="Print" />
                </children>
             </HBox>
          </children>
