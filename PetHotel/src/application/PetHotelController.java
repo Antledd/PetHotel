@@ -22,7 +22,8 @@ import javafx.scene.input.MouseEvent;
 
 public class PetHotelController {
 
-
+	List<PetClient> clientList = new ArrayList<PetClient>(); // Per pochi oggetti un ArrayList è sufficiente
+     
 	@FXML // ResourceBundle that was given to the FXMLLoader
 	private ResourceBundle resources;
 
@@ -49,13 +50,58 @@ public class PetHotelController {
 		int days = Integer.parseInt(daysTextField.getText());
 
 		outputField.appendText(owner + "\t" + pet + "\t" + "\t" + days + "\n");
+	
+		PetClient petClient = new PetClient(owner,pet, days);
+		clientList.add(petClient);
 	}
 
 	@FXML
 	void printClient(MouseEvent event) {
 		
 		outputField.clear();
-		outputField.appendText("TODO");
+	//  outputField.appendText("ORDINAMENTO PER NUMERO CRESCENTE DI GIORNI:\n");
+	//	Collections.sort(clientList);
+/*		Collections.sort(clientList, new Comparator<PetClient>() {
+			@Override
+			public int compare(PetClient o1, PetClient o2) {
+				if(o1.getDays() < o2.getDays())
+					return -1;
+				if(o1.getDays() > o2.getDays())
+					return 1;
+				
+				return 0;
+			}
+		});
+*/		
+
+		// outputField.appendText("ELIMINAZIONE DI NUMERO GIORNI SUPERIORE A 20:\n");
+		//Si può usare l'iteratore invece di quanto commentato sopra:
+		//Iterator permette di andare solo in avanti al contrario di ListIterator che va avanti e indietro
+/*		Iterator<PetClient> it = clientList.iterator();
+		while(it.hasNext()) {
+			PetClient pt = it.next();
+			
+			//Se voglio eliminare dalla lista durate superiori per es. a 20 giorni
+			if(pt.getDays() > 20)
+				it.remove();
+		}
+*/		
+		//meglio ancora la ListIterator<> che va sia avanti che indietro
+		outputField.appendText("ELIMINAZIONE DI NUMERO GIORNI SUPERIORE A 20:\n");
+		ListIterator<PetClient> lt = clientList.listIterator(clientList.size()-1);
+		while(lt.hasPrevious()) {
+			PetClient pt = lt.previous();
+			
+			//Se voglio eliminare dalla lista durate superiori per es. a 20 giorni
+			if(pt.getDays() > 20)
+				lt.remove();
+		}
+		
+		
+		//Fatto quanto con l'iteratore di sopra, ora faccio la stampa
+		for(PetClient pt : clientList) {
+			outputField.appendText(pt.toString()+"\n");
+		}
 	}
 
 	@FXML // This method is called by the FXMLLoader when initialization is
